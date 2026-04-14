@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+
+  # SQL Server running locally in Docker
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: fitness-tracker-db
+    environment:
+      SA_PASSWORD: "YourStrong!Passw0rd"
+      ACCEPT_EULA: "Y"
+      MSSQL_PID: "Developer"
+    ports:
+      - "1433:1433"    # Exposes SQL Server on localhost:1433
+    volumes:
+      - sqlserver_data:/var/opt/mssql  # Persists data between restarts
+
+volumes:
+  sqlserver_data:
